@@ -3,7 +3,7 @@ CREATE TABLE users_details (
     nickname VARCHAR(60) NOT NULL UNIQUE,
     avatar_url TEXT NULL,
     role_id INTEGER,
-    updated_at TIMESTAMP
+    updated_at TIMESTAMP,
 
     CONSTRAINT fk_users_details_user
         FOREIGN KEY (users_id)
