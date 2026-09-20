@@ -1,0 +1,4 @@
+CREATE TABLE users_role {
+    id INTEGER PRIMARY KEY,
+    name VARCHAR(20) UNIQUE NOT NULL
+}
