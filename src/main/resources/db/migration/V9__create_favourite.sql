@@ -1,15 +1,15 @@
 CREATE TABLE favourite (
-    id_recipe INTEGER UNIQUE NOT NULL,
+    id_recipe INTEGER NOT NULL,
     id_user INTEGER NOT NULL
 
-    CONSTRAINT pk__category_recipe
-        PRIMARY KEY(id_category, id_recipe),
-    
-    CONSTRAINT fk__category_recipe_category
-        FOREIGN KEY(id_category)
-        REFERENCES categories(id),
+     CONSTRAINT pk_favourite
+        PRIMARY KEY (id_recipe, id_user),
 
-    CONSTRAINT fk__category_recipe_recipe
+    CONSTRAINT fk_favourite_recipe
         FOREIGN KEY (id_recipe)
-        REFERENCES recipe(id)
+        REFERENCES recipe(id),
+
+    CONSTRAINT fk_favourite_user
+        FOREIGN KEY (id_user)
+        REFERENCES users_auth(id)
 )
