@@ -2,7 +2,7 @@ CREATE TABLE recipe (
     id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name VARCHAR(155) NOT NULL,
     description TEXT NULL,
-    instructions TEXT NOT NULL,
+    instructions TEXT NULL,
     image_url TEXT NOT NULL,
     servings INTEGER NOT NULL,
     author_id INTEGER NOT NULL,
