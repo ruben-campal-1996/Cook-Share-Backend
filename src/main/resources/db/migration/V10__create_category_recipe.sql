@@ -7,9 +7,10 @@ CREATE TABLE category_recipe (
 
     CONSTRAINT fk_category_recipe_category
         FOREIGN KEY (id_category)
-        REFERENCES category(id),
+        REFERENCES categories(id),
 
     CONSTRAINT fk_category_recipe_recipe
         FOREIGN KEY (id_recipe)
         REFERENCES recipe(id)
+        ON DELETE CASCADE
 )

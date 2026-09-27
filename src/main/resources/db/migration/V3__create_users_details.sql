@@ -2,7 +2,7 @@ CREATE TABLE users_details (
     user_id INTEGER PRIMARY KEY,
     nickname VARCHAR(60) NOT NULL UNIQUE,
     avatar_url TEXT NULL,
-    role_id INTEGER,
+    role_id INTEGER NOT NULL,
     updated_at TIMESTAMP,
 
     CONSTRAINT fk_users_details_user

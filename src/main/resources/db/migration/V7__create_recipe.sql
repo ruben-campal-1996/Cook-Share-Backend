@@ -11,13 +11,13 @@ CREATE TABLE recipe (
     calories_per_serving INTEGER NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL,
-    publised_at TIMESTAMP NOT NULL,
-    reviewed_at TIMESTAMP NOT NULL,
-    reviewed_by VARCHAR(60) NULL,
+    published_at TIMESTAMP NULL,
+    reviewed_at TIMESTAMP NULL,
+    reviewed_by INTEGER NULL,
 
     CONSTRAINT fk__recipe_author
         FOREIGN KEY (author_id)
-        REFERENCES users_auth(id),
+        REFERENCES users_details(user_id),
 
     CONSTRAINT fk_recipe_status_id_status
         FOREIGN KEY (status_id)
@@ -25,5 +25,5 @@ CREATE TABLE recipe (
     
     CONSTRAINT fk_recipe_reviewer
         FOREIGN KEY (reviewed_by)
-        REFERENCES users_auth(id)
+        REFERENCES users_details(user_id)
 )
