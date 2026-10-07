@@ -3,5 +3,5 @@ CREATE table ingredients (
     name VARCHAR(60) UNIQUE NOT NULL,
     description TEXT NULL,
     image_url TEXT NOT NULL,
-    calories_per_100g INTEGER NULL
+    calories_per_100g NUMERIC(5,2) NULL
 )
