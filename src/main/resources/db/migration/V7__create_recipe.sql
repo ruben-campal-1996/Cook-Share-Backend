@@ -10,6 +10,7 @@ CREATE TABLE recipe (
     total_calories INTEGER NULL,
     calories_per_serving INTEGER NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    status BOOLEAN NOT NULL DEFAULT TRUE,
     updated_at TIMESTAMP NOT NULL,
     published_at TIMESTAMP NULL,
     reviewed_at TIMESTAMP NULL,
