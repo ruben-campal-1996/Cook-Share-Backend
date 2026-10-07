@@ -1,6 +1,6 @@
 CREATE TABLE recipe (
     id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    name VARCHAR(155) NOT NULL,
+    name VARCHAR(155) NOT NULL UNIQUE,
     description TEXT NULL,
     instructions TEXT NULL,
     image_url TEXT NOT NULL,
