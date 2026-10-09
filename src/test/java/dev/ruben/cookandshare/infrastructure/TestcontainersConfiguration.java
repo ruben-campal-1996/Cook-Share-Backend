@@ -13,7 +13,7 @@ public class TestcontainersConfiguration {
     @ServiceConnection
     PostgreSQLContainer postgres() {
         return new PostgreSQLContainer("postgres:18")
-                .withDatabaseName("giacobello")
+                .withDatabaseName("cookandshare")
                 .withUsername("test")
                 .withPassword("test");
     }
