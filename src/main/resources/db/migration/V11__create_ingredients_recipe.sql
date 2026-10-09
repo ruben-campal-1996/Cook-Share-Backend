@@ -6,6 +6,9 @@ CREATE TABLE ingredient_recipe (
 
     CONSTRAINT pk_ingredients_recipe
         PRIMARY KEY (id_recipe, id_ingredient),
+
+    CONSTRAINT ck_ingredient_recipe_quantity_positive
+        CHECK (quantity > 0),
     
     CONSTRAINT fk_ingredient_recipe_recipe
         FOREIGN KEY (id_recipe)
