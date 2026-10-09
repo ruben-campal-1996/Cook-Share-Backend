@@ -1,5 +1,7 @@
 package dev.ruben.cookandshare.ingredient.entity;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,8 +25,8 @@ public class IngredientEntity {
     @Column (name="image_url", nullable = false, columnDefinition = "TEXT")
     private String imageUrl;
 
-    @Column (name="calories_per_100g", nullable = true)
-    private Integer caloriesPer100g;
+    @Column(name = "calories_per_100g", precision = 5, scale = 2)
+    private BigDecimal caloriesPer100g;
 
     
     
@@ -33,7 +35,7 @@ public class IngredientEntity {
 
 
 
-    public IngredientEntity(Integer id, String name, String description, String imageUrl, Integer caloriesPer100g) {
+    public IngredientEntity(Integer id, String name, String description, String imageUrl, BigDecimal caloriesPer100g) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -73,11 +75,11 @@ public class IngredientEntity {
         this.imageUrl=imageUrl;
     }
 
-    public Integer getCaloriesPer100g(){
+    public BigDecimal getCaloriesPer100g(){
         return caloriesPer100g;
     }
 
-    public void setCaloriesPer100g(Integer caloriesPer100g) {
+    public void setCaloriesPer100g(BigDecimal caloriesPer100g) {
         this.caloriesPer100g=caloriesPer100g;
     }
 }
