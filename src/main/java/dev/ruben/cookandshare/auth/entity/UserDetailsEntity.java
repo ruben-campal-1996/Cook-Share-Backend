@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,8 +23,9 @@ public class UserDetailsEntity {
     @Column(name = "avatar_url", columnDefinition = "TEXT")
     private String avatarUrl;
 
-    @Column(name = "role_id", nullable = false)
-    private Integer roleId;
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
+    private UserRoleEntity role;
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
@@ -54,12 +57,12 @@ public class UserDetailsEntity {
         this.avatarUrl = avatarUrl;
     }
 
-    public Integer getRoleId() {
-        return roleId;
+    public UserRoleEntity getRole() {
+        return role;
     }
 
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
+    public void setRole(UserRoleEntity role) {
+        this.role = role;
     }
 
     public LocalDateTime getUpdatedAt() {
