@@ -10,7 +10,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - cookandshare-pgdata:/var/lib/postgresql
+      - cookandshare:/var/lib/postgresql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USERNAME} -d cookandshare"]
       interval: 5s
@@ -18,4 +18,4 @@ services:
       retries: 5
 
 volumes:
-  cookandshare-pgdata:
+  cookandshare:
