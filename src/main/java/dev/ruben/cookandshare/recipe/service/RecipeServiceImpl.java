@@ -83,6 +83,7 @@ public class RecipeServiceImpl implements RecipeService {
         updatedRecipe.setId(recipe.getId());
         updatedRecipe.setAuthor(getAuthorOrThrow(request.authorId()));
         updatedRecipe.setRecipeStatus(recipe.getRecipeStatus());
+        updatedRecipe.setCategories(recipe.getCategories());
         updatedRecipe.setCreatedAt(recipe.getCreatedAt());
         updatedRecipe.setPublishedAt(recipe.getPublishedAt());
         updatedRecipe.setReviewedAt(recipe.getReviewedAt());
