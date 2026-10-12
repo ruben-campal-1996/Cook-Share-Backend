@@ -13,9 +13,11 @@ public record RecipeDTOResponse(
     Integer statusId,
     Integer totalCalories,
     Integer caloriesPerServing,
+    LocalDateTime createdAt,
+    LocalDateTime updatedAt,
+    boolean status,
     LocalDateTime publishedAt,
     LocalDateTime reviewedAt,
     Integer reviewedBy
 ) {
-    
 }
