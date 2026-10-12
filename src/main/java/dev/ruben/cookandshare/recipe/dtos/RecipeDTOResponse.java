@@ -1,6 +1,7 @@
 package dev.ruben.cookandshare.recipe.dtos;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public record RecipeDTOResponse(
     Integer id,
@@ -9,6 +10,7 @@ public record RecipeDTOResponse(
     String instructions,
     String imageUrl,
     Integer servings,
+    List<Integer> categoryIds,
     Integer authorId,
     Integer statusId,
     Integer totalCalories,
