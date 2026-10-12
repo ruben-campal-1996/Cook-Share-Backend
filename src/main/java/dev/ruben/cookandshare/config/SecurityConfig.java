@@ -66,20 +66,30 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST,
                                 endpoint + "/auth/token",
+                                endpoint + "/auth/change-password",
                                 endpoint + "/categories",
+                                endpoint + "/recipes",
                                 endpoint + "/ingredients")
                         .permitAll()
                         .requestMatchers(HttpMethod.GET,
                                 endpoint + "/categories",
                                 endpoint + "/ingredients",
-                                endpoint + "/ingredients/*")
+                                endpoint + "/ingredients/*",
+                                endpoint + "/recipes",
+                                endpoint + "/images",
+                                endpoint + "/images/*",
+                                endpoint + "/recipes/*")
+                        .permitAll()
+                        .requestMatchers(HttpMethod.GET, "/images/**")
                         .permitAll()
                         .requestMatchers(HttpMethod.PUT,
                                 endpoint + "/categories/*",
+                                endpoint + "/recipes/*",
                                 endpoint + "/ingredients/*")
                         .permitAll()
                         .requestMatchers(HttpMethod.DELETE,
                                 endpoint + "/categories/*",
+                                endpoint + "/recipes/*",
                                 endpoint + "/ingredients/*")
                         .permitAll()
                         .anyRequest().authenticated())
