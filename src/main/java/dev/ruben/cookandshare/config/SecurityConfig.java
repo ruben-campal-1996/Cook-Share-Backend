@@ -78,20 +78,23 @@ public class SecurityConfig {
                                 endpoint + "/recipes",
                                 endpoint + "/images",
                                 endpoint + "/images/*",
-                                endpoint + "/recipes/*")
+                                endpoint + "/recipes/*",
+                                endpoint + "/user-details")
                         .permitAll()
                         .requestMatchers(HttpMethod.GET, "/images/**")
                         .permitAll()
                         .requestMatchers(HttpMethod.PUT,
                                 endpoint + "/categories/*",
                                 endpoint + "/recipes/*",
-                                endpoint + "/ingredients/*")
-                        .permitAll()
+                                endpoint + "/ingredients/*",
+                                endpoint + "/user-details")
+                        .authenticated()
                         .requestMatchers(HttpMethod.DELETE,
                                 endpoint + "/categories/*",
                                 endpoint + "/recipes/*",
-                                endpoint + "/ingredients/*")
-                        .permitAll()
+                                endpoint + "/ingredients/*",
+                                endpoint + "/user-details")
+                        .authenticated()
                         .anyRequest().authenticated())
                 .authenticationProvider(authenticationProvider)
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt
