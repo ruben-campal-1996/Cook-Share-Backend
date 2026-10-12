@@ -1,8 +1,11 @@
 package dev.ruben.cookandshare.recipe.entity;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import dev.ruben.cookandshare.auth.entity.UserDetailsEntity;
+import dev.ruben.cookandshare.categories.entity.CategoryEntity;
 import dev.ruben.cookandshare.recipe.status.entity.RecipeStatusEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,6 +14,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
@@ -45,6 +50,13 @@ public class RecipeEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "status_id", nullable = false)
     private RecipeStatusEntity recipeStatus;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "category_recipe",
+            joinColumns = @JoinColumn(name = "id_recipe"),
+            inverseJoinColumns = @JoinColumn(name = "id_category"))
+    private Set<CategoryEntity> categories = new HashSet<>();
 
     @Column(name = "total_calories")
     private Integer totalCalories;
@@ -185,6 +197,14 @@ public class RecipeEntity {
 
     public void setRecipeStatus(RecipeStatusEntity recipeStatus) {
         this.recipeStatus = recipeStatus;
+    }
+
+    public Set<CategoryEntity> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<CategoryEntity> categories) {
+        this.categories = categories;
     }
 
     public Integer getTotalCalories() {
