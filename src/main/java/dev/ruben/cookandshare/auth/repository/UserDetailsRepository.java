@@ -10,4 +10,6 @@ import dev.ruben.cookandshare.auth.entity.UserDetailsEntity;
 public interface UserDetailsRepository extends JpaRepository<UserDetailsEntity, Integer> {
     @EntityGraph(attributePaths = "role")
     Optional<UserDetailsEntity> findByUserId(Integer userId);
+
+    boolean existsByNicknameAndUserIdNot(String nickname, Integer userId);
 }
