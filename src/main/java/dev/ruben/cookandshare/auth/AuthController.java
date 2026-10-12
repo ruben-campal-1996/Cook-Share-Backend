@@ -41,26 +41,30 @@ public class AuthController {
 
     @PostMapping("/token")
     public TokenResponse token(@Valid @RequestBody LoginRequest request) {
-        Authentication authentication = authenticate(request.username(), request.password());
-        UserAuthEntity user = findUser(authentication.getName());
+        UserAuthEntity user = findUser(request.email());
 
         if (user.isMustChangePassword()) {
+            if (user.getDeletedAt() != null
+                    || !passwordEncoder.matches(request.password(), user.getPasswordHash())) {
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid email or password");
+            }
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Password change required");
         }
 
+        Authentication authentication = authenticate(request.email(), request.password());
         return new TokenResponse(tokenService.generateToken(authentication));
     }
 
     @PostMapping("/change-password")
     public TokenResponse changePassword(@Valid @RequestBody ChangePasswordRequest request) {
-        UserAuthEntity user = findUser(request.username());
+        UserAuthEntity user = findUser(request.email());
 
         if (!user.isMustChangePassword()) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Password change is not required");
         }
 
         if (!passwordEncoder.matches(request.currentPassword(), user.getPasswordHash())) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid username or password");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid email or password");
         }
 
         if (passwordEncoder.matches(request.newPassword(), user.getPasswordHash())) {
@@ -71,7 +75,7 @@ public class AuthController {
         user.setMustChangePassword(false);
         userAuthRepository.save(user);
 
-        Authentication authentication = authenticate(request.username(), request.newPassword());
+        Authentication authentication = authenticate(request.email(), request.newPassword());
         return new TokenResponse(tokenService.generateToken(authentication));
     }
 
@@ -80,13 +84,13 @@ public class AuthController {
             return authenticationManager.authenticate(
                     UsernamePasswordAuthenticationToken.unauthenticated(email, password));
         } catch (AuthenticationException exception) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid username or password");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid email or password");
         }
     }
 
     private UserAuthEntity findUser(String email) {
         return userAuthRepository.findByEmail(email)
                 .orElseThrow(
-                        () -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid mail or password"));
+                        () -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid email or password"));
     }
 }
