@@ -225,6 +225,11 @@ class CookandshareEndToEndTest {
         String newPassword = "E2e-new-pass-2026";
 
         try {
+            ResponseEntity<JsonNode> loginRequiresPasswordChange = exchange(
+                    HttpMethod.POST, API + "/auth/token",
+                    Map.of("email", email, "password", "Admin"), null);
+            assertEquals(HttpStatus.CONFLICT, loginRequiresPasswordChange.getStatusCode());
+
             ResponseEntity<JsonNode> changed = exchange(
                     HttpMethod.POST, API + "/auth/change-password",
                     Map.of("email", email, "currentPassword", "Admin", "newPassword", newPassword), null);
