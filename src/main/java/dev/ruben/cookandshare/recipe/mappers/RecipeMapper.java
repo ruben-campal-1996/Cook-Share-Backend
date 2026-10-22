@@ -14,16 +14,6 @@ import dev.ruben.cookandshare.recipe.entity.RecipeEntity;
 @Mapper(componentModel = "spring")
 public interface RecipeMapper {
 
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "updatedAt", ignore = true)
-    @Mapping(target = "author", ignore = true)
-    @Mapping(target = "recipeStatus", ignore = true)
-    @Mapping(target = "categories", ignore = true)
-    @Mapping(target = "reviewer", ignore = true)
-    @Mapping(target = "publishedAt", ignore = true)
-    @Mapping(target = "reviewedAt", ignore = true)
-    @Mapping(target = "status", ignore = true)
     RecipeEntity toEntity(RecipeDTORequest dto);
 
     @Mapping(target = "authorId", source = "author.userId")

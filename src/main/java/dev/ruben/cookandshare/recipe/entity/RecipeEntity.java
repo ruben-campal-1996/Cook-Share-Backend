@@ -4,6 +4,10 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import dev.ruben.cookandshare.auth.entity.UserDetailsEntity;
 import dev.ruben.cookandshare.categories.entity.CategoryEntity;
 import dev.ruben.cookandshare.recipe.status.entity.RecipeStatusEntity;
@@ -23,6 +27,9 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "recipe")
+@Getter
+@Setter
+@NoArgsConstructor
 public class RecipeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -83,42 +90,22 @@ public class RecipeEntity {
     @Column(nullable = false)
     private boolean status = true;
 
-    public RecipeEntity() {
-    }
-
+    @Builder
     public RecipeEntity(
-            Integer id,
             String name,
             String description,
             String instructions,
             String imageUrl,
             Integer servings,
-            UserDetailsEntity author,
-            RecipeStatusEntity recipeStatus,
             Integer totalCalories,
-            Integer caloriesPerServing,
-            LocalDateTime createdAt,
-            LocalDateTime updatedAt,
-            LocalDateTime publishedAt,
-            LocalDateTime reviewedAt,
-            UserDetailsEntity reviewer,
-            boolean status) {
-        this.id = id;
+            Integer caloriesPerServing) {
         this.name = name;
         this.description = description;
         this.instructions = instructions;
         this.imageUrl = imageUrl;
         this.servings = servings;
-        this.author = author;
-        this.recipeStatus = recipeStatus;
         this.totalCalories = totalCalories;
         this.caloriesPerServing = caloriesPerServing;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.publishedAt = publishedAt;
-        this.reviewedAt = reviewedAt;
-        this.reviewer = reviewer;
-        this.status = status;
     }
 
     @PrePersist
@@ -133,141 +120,5 @@ public class RecipeEntity {
     @PreUpdate
     protected void onUpdate() {
         updatedAt = LocalDateTime.now();
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getInstructions() {
-        return instructions;
-    }
-
-    public void setInstructions(String instructions) {
-        this.instructions = instructions;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public Integer getServings() {
-        return servings;
-    }
-
-    public void setServings(Integer servings) {
-        this.servings = servings;
-    }
-
-    public UserDetailsEntity getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(UserDetailsEntity author) {
-        this.author = author;
-    }
-
-    public RecipeStatusEntity getRecipeStatus() {
-        return recipeStatus;
-    }
-
-    public void setRecipeStatus(RecipeStatusEntity recipeStatus) {
-        this.recipeStatus = recipeStatus;
-    }
-
-    public Set<CategoryEntity> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(Set<CategoryEntity> categories) {
-        this.categories = categories;
-    }
-
-    public Integer getTotalCalories() {
-        return totalCalories;
-    }
-
-    public void setTotalCalories(Integer totalCalories) {
-        this.totalCalories = totalCalories;
-    }
-
-    public Integer getCaloriesPerServing() {
-        return caloriesPerServing;
-    }
-
-    public void setCaloriesPerServing(Integer caloriesPerServing) {
-        this.caloriesPerServing = caloriesPerServing;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public LocalDateTime getPublishedAt() {
-        return publishedAt;
-    }
-
-    public void setPublishedAt(LocalDateTime publishedAt) {
-        this.publishedAt = publishedAt;
-    }
-
-    public LocalDateTime getReviewedAt() {
-        return reviewedAt;
-    }
-
-    public void setReviewedAt(LocalDateTime reviewedAt) {
-        this.reviewedAt = reviewedAt;
-    }
-
-    public UserDetailsEntity getReviewer() {
-        return reviewer;
-    }
-
-    public void setReviewer(UserDetailsEntity reviewer) {
-        this.reviewer = reviewer;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
     }
 }
