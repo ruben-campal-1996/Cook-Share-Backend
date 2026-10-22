@@ -8,4 +8,6 @@ import dev.ruben.cookandshare.auth.entity.UserAuthEntity;
 
 public interface UserAuthRepository extends JpaRepository<UserAuthEntity, Integer> {
     Optional<UserAuthEntity> findByEmail(String email);
+
+    boolean existsByEmail(String email);
 }

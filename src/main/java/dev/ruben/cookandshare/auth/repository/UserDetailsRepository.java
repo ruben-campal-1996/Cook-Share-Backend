@@ -11,5 +11,7 @@ public interface UserDetailsRepository extends JpaRepository<UserDetailsEntity, 
     @EntityGraph(attributePaths = "role")
     Optional<UserDetailsEntity> findByUserId(Integer userId);
 
+    boolean existsByNickname(String nickname);
+
     boolean existsByNicknameAndUserIdNot(String nickname, Integer userId);
 }
