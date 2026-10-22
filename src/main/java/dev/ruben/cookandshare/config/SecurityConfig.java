@@ -67,6 +67,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
                         .requestMatchers(HttpMethod.POST,
+                                endpoint + "/auth/register",
                                 endpoint + "/auth/token",
                                 endpoint + "/auth/change-password",
                                 endpoint + "/categories",
